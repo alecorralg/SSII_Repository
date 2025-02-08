@@ -26,25 +26,35 @@ A continuación se incluyen los comandos utilizados en los análisis.
 Para realizar ataques de fuerza bruta y diccionario utilizando Hashcat, puedes ejecutar los siguientes comandos:
 - **hashcat -m 1410 hashes.txt fechas.txt --force**
 
-###Conversión Base64 a Hexadecimal python
-import base64 
-hash_base64 = "hashCode"  # Añadir el hash correspondiente
-hash_bytes = base64.b64decode(hash_base64) 
-hash_hex = hash_bytes.hex() 
-print(hash_hex)
+## Conversión Base64 a Hexadecimal en Python
 
-### Generación de Diccionario de Fechas Comunes python
-from datetime import datetime, timedelta 
-start_date = datetime(1980, 1, 1) 
-end_date = datetime(2025, 12, 31) 
-formatos = ["%d%m%Y", "%Y%m%d", "%d-%m-%Y", "%d/%m/%Y", "%d%m%y"] 
-fechas_generadas = [] 
-current_date = start_date 
-while current_date <= end_date: 
-    for formato in formatos: 
-        fechas_generadas.append(current_date.strftime(formato)) 
-    current_date += timedelta(days=1) 
+Este script convierte un hash en Base64 a su equivalente en formato hexadecimal:
+
+```python
+import base64
+
+hash_base64 = "hashCode"  # Añadir el hash correspondiente
+hash_bytes = base64.b64decode(hash_base64)
+hash_hex = hash_bytes.hex()
+print(hash_hex)
+```
+## Generación de Diccionario de Fechas Comunes en Python
+```
+from datetime import datetime, timedelta
+
+start_date = datetime(1980, 1, 1)
+end_date = datetime(2025, 12, 31)
+formatos = ["%d%m%Y", "%Y%m%d", "%d-%m-%Y", "%d/%m/%Y", "%d%m%y"]
+fechas_generadas = []
+current_date = start_date
+
+while current_date <= end_date:
+    for formato in formatos:
+        fechas_generadas.append(current_date.strftime(formato))
+    current_date += timedelta(days=1)
 
 with open('fechas.txt', 'w') as file:
     for fecha in fechas_generadas:
         file.write(fecha + '\n')
+        ```
+        
